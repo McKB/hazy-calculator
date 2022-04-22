@@ -1,24 +1,52 @@
-const calculate = () => {
-  // initialize operator variable
-  // initialize nums array
-  // initialize answer variable
+const calculate = (calcSteps) => {
+  let operator
+  let numsArray = []
+  let answer
 
-  // loop over incoming array
-  // if value is a number, store it in an array called nums
-  // if value is an operator, store it in a variable called operator
-  // if value is 'NULL', add it to nums as 0
-  // if none of those, move onto the next item and ignore the current item.
+  for (let item of calcSteps) {
+    if (!isNaN(parseInt(item))) {
+      numsArray.push(parseInt(item))
+    }
+    else if (isOperator(item)) {
+      operator = item
+    }
+    else if (item === null) {
+      numsArray.push(0)
+    }
+  }
 
-  // if the nums array has two values in it:
-  //   if operator is +, add the values & store it in answer
-  //   if operator is -, subtract the values & store it in answer
-  //   if operator is *, multiply the values & store it in answer
-  //   if operator is /, divide the values & store it in answer
-  //   if there is no operator, answer = NaN
-  // if the nums array does not have two values in it, answer = NaN
+  if (numsArray.length === 2 && isOperator(operator)) {
+    answer = doMath(numsArray, operator)
+  }
+  else {
+    answer = NaN
+  }
 
-  // return answer
+  return answer
+}
 
+const isOperator = (item) => {
+  let operatorArray = ['+', '-', '*', '/']
+
+  for (let op of operatorArray) {
+    if (item === op) {
+      return true
+    }
+  }
+
+  return false
+}
+
+const doMath = (nums, operator) => {
+  if (operator === '+') {
+    return nums[0] + nums[1]
+  } else if (operator === '-') {
+    return nums[0] - nums[1]
+  } else if (operator === '*') {
+    return nums[0] * nums[1]
+  } else {
+    return nums[0] / nums[1]
+  }
 }
 
 module.exports = calculate
