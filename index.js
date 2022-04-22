@@ -1,7 +1,7 @@
 const calculate = (calcSteps) => {
   let operator
   let numsArray = []
-  let answer
+  let answer = NaN
 
   for (let item of calcSteps) {
     if (!isNaN(parseInt(item))) {
@@ -17,9 +17,6 @@ const calculate = (calcSteps) => {
 
   if (numsArray.length === 2 && isOperator(operator)) {
     answer = doMath(numsArray, operator)
-  }
-  else {
-    answer = NaN
   }
 
   return answer
